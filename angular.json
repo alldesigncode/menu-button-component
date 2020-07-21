@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "button-component"
+    }
+  },
+  "defaultProject": "button-component",
+  "cli": {
+    "analytics": false
+  }
 }

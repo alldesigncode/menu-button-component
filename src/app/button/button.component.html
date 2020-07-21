@@ -1,0 +1,20 @@
+<div class="overlay" #overlay (click)="closeMenu(menu, btn, overlay)"></div>
+<div class="menu-container">
+  <button
+    class="btn btn-circle"
+    #btn
+    (click)="showMenu(menu, btn, overlay)"
+    [ngStyle]="setStyles()"
+    [disabled]="disabled"
+  >
+    <span>menu</span>
+  </button>
+  <div class="menu" #menu [ngStyle]="setMenuPosition()">
+    <div class="menu__item" *ngFor="let menu of menuData" (click)="select(menu)">
+      <div class="menu__item--img" *ngIf="menu.menuImageUrl">
+        <img src="{{ menu.menuImageUrl }}" alt="" />
+      </div>
+      <div class="menu__item--text">{{ menu.menuTitle }}</div>
+    </div>
+  </div>
+</div>

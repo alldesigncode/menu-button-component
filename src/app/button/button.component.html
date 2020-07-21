@@ -12,7 +12,7 @@
   <div class="menu" #menu [ngStyle]="setMenuPosition()">
     <div class="menu__item" *ngFor="let menu of menuData" (click)="select(menu)">
       <div class="menu__item--img" *ngIf="menu.menuImageUrl">
-        <img src="{{ menu.menuImageUrl }}" alt="" />
+        <img src="{{ menu.menuImageUrl }}" />
       </div>
       <div class="menu__item--text">{{ menu.menuTitle }}</div>
     </div>

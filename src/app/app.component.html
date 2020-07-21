@@ -1,5 +1,7 @@
 
 
 <app-button
-  [menuData]="menuData">
+  [menuData]="menuData"
+  [menuPosition]="'topLeft'"
+  (menuSelect)="onSelect($event)">
 </app-button>

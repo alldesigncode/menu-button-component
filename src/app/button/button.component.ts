@@ -4,10 +4,11 @@ import {
   Input,
   ViewChild,
   ElementRef,
-  ChangeDetectionStrategy,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
 } from '@angular/core';
+
 import { gsap, Expo } from 'gsap';
 
 export type MenuPosition =
@@ -31,38 +32,17 @@ export interface MenuModel {
 export class ButtonComponent implements OnInit {
   @ViewChild('menu', { static: true }) menu: ElementRef;
 
-  @Input() menuPosition: MenuPosition = 'topLeft';
   @Input() menuData: MenuModel[];
+  @Input() menuPosition: MenuPosition = 'topLeft';
   @Input() color = '#3d363b';
   @Input() disabled: boolean;
+
   @Output() menuSelect = new EventEmitter<MenuModel>();
+
+  constructor() {}
 
   ngOnInit(): void {
     this.setMenuPosition();
-  }
-
-  setMenuPosition() {
-    const menu = this.menu.nativeElement as HTMLDivElement;
-    switch (this.menuPosition) {
-      case 'topLeft':
-        menu.style.right = '0';
-        menu.style.bottom = '0';
-        return;
-      case 'bottomLeft':
-        menu.style.top = '0';
-        menu.style.right = '0';
-        return;
-      case 'topRight':
-        menu.style.left = '0';
-        menu.style.bottom = '0';
-        return;
-      case 'bottomRight':
-        menu.style.top = '0';
-        menu.style.left = '0';
-        return;
-      default:
-        return;
-    }
   }
 
   setStyles() {
@@ -72,6 +52,8 @@ export class ButtonComponent implements OnInit {
       cursor: this.disabled ? 'default' : 'pointer',
     };
   }
+
+  select = (menu: MenuModel) => this.menuSelect.emit(menu);
 
   showMenu(
     menu: HTMLDivElement,
@@ -85,9 +67,9 @@ export class ButtonComponent implements OnInit {
     gsap.to(btn, {
       duration: 0.3,
       autoAlpha: 0,
+      scale: 1.6,
       x: this.translatePosition.positionX,
       y: this.translatePosition.positionY,
-      scale: 1.6,
       ease: Expo.easeInOut as any,
     });
     gsap.to(menu, {
@@ -107,23 +89,6 @@ export class ButtonComponent implements OnInit {
       ease: Expo.easeInOut as any,
     });
   }
-
-  get translatePosition(): { positionX: number; positionY: number } {
-    switch (this.menuPosition) {
-      case 'topLeft':
-        return { positionX: -20, positionY: -20 };
-      case 'topRight':
-        return { positionX: 10, positionY: -20 };
-      case 'bottomLeft':
-        return { positionX: -20, positionY: 20 };
-      case 'bottomRight':
-        return { positionX: 10, positionY: 10 };
-      default:
-        return;
-    }
-  }
-
-  select = (menu: MenuModel) => this.menuSelect.emit(menu);
 
   closeMenu(
     menu: HTMLDivElement,
@@ -158,5 +123,44 @@ export class ButtonComponent implements OnInit {
       autoAlpha: 1,
       ease: Expo.easeInOut as any,
     });
+  }
+
+  setMenuPosition() {
+    const menu = this.menu.nativeElement as HTMLDivElement;
+    switch (this.menuPosition) {
+      case 'topLeft':
+        menu.style.right = '0';
+        menu.style.bottom = '0';
+        return;
+      case 'bottomLeft':
+        menu.style.top = '0';
+        menu.style.right = '0';
+        return;
+      case 'topRight':
+        menu.style.left = '0';
+        menu.style.bottom = '0';
+        return;
+      case 'bottomRight':
+        menu.style.top = '0';
+        menu.style.left = '0';
+        return;
+      default:
+        return;
+    }
+  }
+
+  get translatePosition(): { positionX: number; positionY: number } {
+    switch (this.menuPosition) {
+      case 'topLeft':
+        return { positionX: -20, positionY: -20 };
+      case 'topRight':
+        return { positionX: 10, positionY: -20 };
+      case 'bottomLeft':
+        return { positionX: -20, positionY: 20 };
+      case 'bottomRight':
+        return { positionX: 10, positionY: 10 };
+      default:
+        return;
+    }
   }
 }

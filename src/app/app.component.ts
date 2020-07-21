@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MenuModel } from './button/button.component';
 import { menuData } from './helpers/menuData';
+import { MenuModel } from './button/button.component';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,8 @@ import { menuData } from './helpers/menuData';
 export class AppComponent {
   menuData = menuData;
 
+  onSelect(menu: MenuModel) {
+    console.log(menu);
 
-
-
-
-
-
-
-
-
-  onMenuSelect(menuItem: MenuModel) {
-    console.log(menuItem);
   }
 }

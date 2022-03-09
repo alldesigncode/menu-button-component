@@ -18,3 +18,19 @@ body {
   align-content: center;
   justify-content: center;
 }
+
+.count-container {
+  position: absolute;
+  top: 60%;
+  left: 30%;
+}
+.prog {
+  width: 500px;
+    height: 3px;
+    background: #ccc;
+  .progress {
+    height: inherit;
+    width: 0%;
+    background: #1550d1;
+  }
+}
